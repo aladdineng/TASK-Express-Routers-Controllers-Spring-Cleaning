@@ -3,7 +3,7 @@ Our code is growing day by day, we need to organize it before we're flooded with
 #### Folders Structure
 
 1. Create a folder called `apis`.
-2. Inside this folder, create a folder called `products`.
+2. Inside `apis`, create a folder called `products`.
 3. Inside `products`, create two files `routes.js` and `controllers.js`.
 
 #### Routes
