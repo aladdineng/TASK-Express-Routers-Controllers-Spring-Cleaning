@@ -8,7 +8,7 @@ Our code is growing day by day, we need to organize it before we're flooded with
 
 #### Routes
 
-Move your routes into their own folder.
+Move your routes into their file.
 
 1. In `products/routes.js`, create a `router` using the `express.Router()` method.
 2. Move all your routes to `products/routes.js`. Change the app instance `app` to `router` in all your routes.
