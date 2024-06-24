@@ -1,0 +1,16 @@
+{
+  "name": "task-express-routers-controllers-spring-cleaning",
+  "version": "1.0.0",
+  "description": "Our code is growing day by day, we need to organize it before we're flooded with more routes!",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
