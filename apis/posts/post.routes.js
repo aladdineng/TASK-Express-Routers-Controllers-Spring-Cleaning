@@ -8,6 +8,7 @@ const {
   postsCreate,
   addPostToTag,
 } = require("./posts.controllers");
+const passport = require("passport");
 
 router.param("postId", async (req, res, next, postId) => {
   const post = await fetchPost(postId, next);
@@ -21,10 +22,15 @@ router.param("postId", async (req, res, next, postId) => {
   }
 });
 
-router.get("/", postsGet);
-router.post("/", postsCreate);
+router.get("/", passport.authenticate("jwt"), { session: false }, postsGet);
+router.post("/", passport.authenticate("jwt"), { session: false }, postsCreate);
 
-router.delete("/:postId", postsDelete);
+router.delete(
+  "/:postId",
+  passport.authenticate("jwt"),
+  { session: false },
+  postsDelete
+);
 
 router.put("/:postId", postsUpdate);
 

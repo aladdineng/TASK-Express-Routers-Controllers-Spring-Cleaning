@@ -12,8 +12,9 @@ exports.fetchPost = async (postId, next) => {
   }
 };
 
-exports.postsCreate = async (req, res) => {
+exports.postsCreate = async (req, res, next) => {
   try {
+    req.body.user = req.user._id;
     const newPost = await Post.create(req.body);
     await Auther.findByIdAndUpdate(req.body.auther, {
       $push: { posts: newPost._id },
@@ -26,6 +27,14 @@ exports.postsCreate = async (req, res) => {
 
 exports.postsDelete = async (req, res) => {
   try {
+    const post = await post.findById(req.post.id);
+    if (post.user.equals(req.user._id)) {
+      await post.findByIdAndRemove({ _id: req.post.id });
+    } else {
+      return res
+        .status(401)
+        .json({ msg: "you can not delete someone else post! " });
+    }
     await Post.findByIdAndRemove({ _id: req.post.id });
     res.status(204).end();
   } catch (error) {

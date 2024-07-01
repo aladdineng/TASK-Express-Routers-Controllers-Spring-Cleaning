@@ -10,9 +10,16 @@ const postsRoutes = require("./apis/posts/post.routes");
 const autherRoutes = require("./apis/Authors/Author_Routes");
 const bookRoute = require("./apis/Books/Books_Routes");
 const tagRoutes = require("./apis/Tag/Tag_Routes");
+const passport = require("passport");
+const { localStrategy, jwtStrategy } = require("./apis/middlewares/passport");
 
 const app = express();
 app.use(express.json());
+
+app.use(passport.initialize());
+passport.use("local", localStrategy);
+passport.use("jwt", jwtStrategy);
+
 app.use(morgan("dev"));
 app.use(cors());
 
@@ -25,6 +32,7 @@ app.use("/posts", postsRoutes);
 app.use("/authors", autherRoutes);
 app.use("/books", bookRoute);
 app.use("/tags", tagRoutes);
+app.use("/auth", autherRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
